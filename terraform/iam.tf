@@ -80,3 +80,39 @@ resource "aws_iam_role" "irsa_role" {
         ]
     })
 }
+
+resource "aws_iam_policy" "pulsedesk_worker_policy" {
+    name = "pulsedesk-worker-policy"
+
+    policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                Effect = "Allow"
+                Action = ["sqs:ReceiveMessage", "sqs:DeleteMessage"]
+                Resource = "*"
+            },
+            {
+                Effect = "Allow"
+                Action = ["dynamodb:GetItem", "dynamodb:PutItem", "dynamodb:UpdateItem"]
+                Resource = "*"
+            },
+            {
+                Effect = "Allow"
+                Action = ["ses:SendEmail"]
+                Resource = "*"
+            },
+            {
+                Effect = "Allow"
+                Action = ["bedrock:InvokeModel"]
+                Resource = "*"
+            }
+        ]
+    })
+}
+
+resource "aws_iam_role_policy_attachment" "irsa_policy_attach" {
+    role = aws_iam_role.irsa_role.name 
+    policy_arn = aws_iam_policy.pulsedesk_worker_policy.arn
+}
+
