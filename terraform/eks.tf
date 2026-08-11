@@ -5,6 +5,7 @@ resource "aws_eks_cluster" "pulsedesk_eks" {
     vpc_config {
         subnet_ids = concat(module.vpc.private_subnets, module.vpc.public_subnets)
     }
+    depends_on = [aws_iam_role_policy_attachment.eks_policy]
 }
 
 resource "aws_eks_node_group" "pulsedesk_node_group" {
@@ -17,4 +18,11 @@ resource "aws_eks_node_group" "pulsedesk_node_group" {
         max_size = 2
         min_size = 1
     }
+    
+    depends_on = [
+    aws_iam_role_policy_attachment.worker_node_policy, 
+    aws_iam_role_policy_attachment.worker_node_cni_policy, 
+    aws_iam_role_policy_attachment.worker_node_container_policy
+    ]
 }
+
