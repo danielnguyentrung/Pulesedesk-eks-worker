@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: pulsedesk-worker
+
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pulsedesk-worker
+  template:
+      metadata:
+        labels:
+          app: pulsedesk-worker
+      spec:
+        containers:
+        - name: pulsedesk-worker
+          image: PLACEHOLDER  
