@@ -15,4 +15,17 @@ spec:
       spec:
         containers:
         - name: pulsedesk-worker
-          image: PLACEHOLDER  
+          image: PLACEHOLDER
+          env:
+        - name: AWS_REGION
+          value: "us-east-2"
+        - name: QUEUE_URL 
+          value: "PLACEHOLDER"
+        - name: USERS_TABLE
+          value: "PLACEHOLDER"
+        - name: SENDER_EMAIL
+          value: "PLACEHOLDER"
+        - name: BEDROCK_MODEL_ID
+          value: "PLACEHOLDER" 
+
+
