@@ -13,19 +13,23 @@ spec:
         labels:
           app: pulsedesk-worker
       spec:
+        serviceAccountName: pulsedesk-worker
         containers:
         - name: pulsedesk-worker
-          image: PLACEHOLDER
+          image: 123456789012.dkr.ecr.us-east-2.amazonaws.com/pulsedesk-worker:latest
           env:
-        - name: AWS_REGION
-          value: "us-east-2"
-        - name: QUEUE_URL 
-          value: "PLACEHOLDER"
-        - name: USERS_TABLE
-          value: "PLACEHOLDER"
-        - name: SENDER_EMAIL
-          value: "PLACEHOLDER"
-        - name: BEDROCK_MODEL_ID
-          value: "PLACEHOLDER" 
+          - name: AWS_REGION
+            value: "us-east-2"
+          - name: QUEUE_URL
+            value: "https://sqs.us-east-2.amazonaws.com/123456789012/Ticket-Queue"
+          - name: USERS_TABLE
+            value: "CustomerDatabase"
+          - name: SENDER_EMAIL
+            valueFrom:
+              secretKeyRef:
+                name: pulsedesk-worker-secrets
+                key: SENDER_EMAIL 
+          - name: BEDROCK_MODEL_ID
+            value: "us.anthropic.claude-haiku-4-5-20251001-v1:0"
 
 

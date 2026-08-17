@@ -184,9 +184,9 @@ def bedrock_validation(body, keyword_weight, ticket_category):
     - DO NOT include any explanations, comments, or analysis in your response. 
     - Use the following exact structure: 
 
-    {"revised_ticket_title": "<revised_ticket_title>",
+    {{"revised_ticket_title": "<revised_ticket_title>",
      "revised_ticket_description": "<revised_ticket_description>",
-     "revised_problem_type": "<validated category from the allowed list>"}
+     "revised_problem_type": "<validated category from the allowed list>"}}
 
     Here is the information to process from the user: 
 
