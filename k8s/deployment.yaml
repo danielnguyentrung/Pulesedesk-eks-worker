@@ -30,6 +30,6 @@ spec:
                 name: pulsedesk-worker-secrets
                 key: SENDER_EMAIL 
           - name: BEDROCK_MODEL_ID
-            value: "us.anthropic.claude-haiku-4-5-20251001-v1:0"
+            value: "us.anthropic.claude-sonnet-4-6"
 
 
