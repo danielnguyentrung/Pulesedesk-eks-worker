@@ -9,8 +9,15 @@ terraform {
             source = "hashicorp/tls" 
         }
     }
-}
 
+    backend "s3" {
+        bucket = "pulsedesk-eks-worker-tfstate-123456789012"
+        key = "pulsedesk-eks-worker/terraform.tfstate"
+        region = "us-east-2"
+        dynamodb_table = "pulsedesk-eks-worker-tf-lock"
+        encrypt = true 
+    }
+}
 
 provider "aws" {
     region = "us-east-2"
