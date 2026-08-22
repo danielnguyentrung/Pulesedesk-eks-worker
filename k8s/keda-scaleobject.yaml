@@ -1,0 +1,20 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject 
+metadata:
+  name: pulse-worker-scaledobject
+spec:
+  scaleTargetRef:
+    name: pulsedesk-worker
+  minReplicaCount: 0
+  maxReplicaCount: 2
+  pollingInterval: 30
+  cooldownPeriod: 300
+  triggers:
+    - type: aws-sqs-queue
+      metadata:
+        queueURL: https://sqs.us-east-2.amazonaws.com/123456789012/Ticket-Queue
+        queueLength: "1"
+        awsRegion: "us-east-2"
+        identityOwner: "operator" 
+
+

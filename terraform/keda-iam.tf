@@ -20,3 +20,22 @@ resource "aws_iam_role" "keda_operator_irsa_role"  {
         ]
     })
 }
+
+resource "aws_iam_policy" "keda_operator_policy" {
+    name = "keda-operator-policy"
+    policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                Effect = "Allow"
+                Action = ["sqs:GetQueueAttributes"]
+                Resource = "*"
+            }
+        ]
+    })
+}
+
+resource "aws_iam_role_policy_attachment" "keda_irsa_role_attachment" {
+    role = aws_iam_role.keda_operator_irsa_role.name
+    policy_arn = aws_iam_policy.keda_operator_policy.arn
+}
