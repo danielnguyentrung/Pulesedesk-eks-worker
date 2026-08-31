@@ -3,3 +3,4 @@
 *.tfstate
 *.tfstate.*
 *.tfvars
+LEARNING_LOG.md
